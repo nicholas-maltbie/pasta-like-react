@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.join-row {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.join-row > label {
+  padding-right: 5px;
+}
+
+.join-row > input {
+  font-size: 15px;
+}
+
+.join-form-list {
+  padding: 0;
+  list-style: none;
+}
+
