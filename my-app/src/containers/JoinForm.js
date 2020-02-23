@@ -19,7 +19,7 @@ class JoinForm extends React.Component {
         .then((response) => response.json())
         .then((responseJson) => {
             console.log(responseJson)
-            return responseJson.movies;
+            return responseJson;
         })
         .catch((error) => {
           console.error(error);
