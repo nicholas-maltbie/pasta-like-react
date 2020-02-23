@@ -7,20 +7,23 @@ class JoinForm extends React.Component {
     }
 
     handleSubmit(e) {
-        var xhr = new XMLHttpRequest()
-
-        // get a callback when the server responds
-        xhr.addEventListener('load', () => {
-            // update the state of the component with the result here
-            console.log(xhr.responseText)
+        const url = 'https://flask-dot-pasta-like.appspot.com/games/join';
+        fetch(url, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                "USERNAME": this.name.value,
+                "ROOM": this.room.value,
+            },
         })
-        // open the request with the verb and the url
-        xhr.open('POST', 'https://flask-dot-pasta-like.appspot.com/games/join')
-
-        xhr.setRequestHeader("USERNAME", this.name.value)
-        xhr.setRequestHeader("ROOM", this.room.value)   
-        // send the request
-        xhr.send()
+        .then((response) => response.json())
+        .then((responseJson) => {
+            console.log(responseJson)
+            return responseJson;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
 
         e.preventDefault();
     }
