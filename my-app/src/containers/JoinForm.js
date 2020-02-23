@@ -4,9 +4,12 @@ class JoinForm extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = { errorMessage: "" };
     }
 
     handleSubmit(e) {
+        const that = this;
+        var responseStatus;
         const url = 'https://flask-dot-pasta-like.appspot.com/games/join';
         fetch(url, {
             method: 'POST',
@@ -15,17 +18,33 @@ class JoinForm extends React.Component {
                 "USERNAME": this.name.value,
                 "ROOM": this.room.value,
             },
-        })
-        .then((response) => response.json())
-        .then((responseJson) => {
-            console.log(responseJson)
-            return responseJson;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+        }).then(
+            (response) => {
+                responseStatus = response.status;
+                return response.json();
+            }
+        ).then(
+            (responseInfo) => {
+                if (responseStatus !== 200) {
+                    that.setState({errorMessage: responseInfo});
+                }
+                else {
+                    console.log(responseInfo["username"])
+                    console.log(responseInfo["room"])
+                    that.setState({errorMessage: ""});
+                    that.props.handler(responseInfo["username"], responseInfo["room"])
+                }
+            }
+        )
+        this.setState({errorMessage: "Attempting to connect to server..."})
 
         e.preventDefault();
+    }
+
+    componentDidCatch(error) {
+        // Log or store the error
+        console.error(error);
+        this.setState({ errorOccurred: true });
     }
 
     render() {
@@ -52,6 +71,9 @@ class JoinForm extends React.Component {
                     </li>
                     <li className="join-row">
                         <input type="submit" value="join" />
+                    </li>
+                    <li className="join-row">
+                        {this.state.errorMessage.length > 0 ? this.state.errorMessage : ""}
                     </li>
                 </ul>
             </form>
