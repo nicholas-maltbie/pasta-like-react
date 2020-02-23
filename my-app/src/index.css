@@ -17,15 +17,28 @@ code {
   margin-bottom: 5px;
 }
 
-.join-row > label {
+.option-list > label, .join-row > label {
   padding-right: 5px;
+}
+
+.option-list > li {
+  float: left;
+  margin: 5px;
 }
 
 .join-row > input {
   font-size: 15px;
 }
 
-.join-form-list {
+.option-button {
+  font-size: 25px;
+  padding: 10px;
+  margin: 5px;
+  min-width: 100px;
+  min-height: 100px;
+}
+
+.option-list, .join-form-list {
   padding: 0;
   list-style: none;
 }

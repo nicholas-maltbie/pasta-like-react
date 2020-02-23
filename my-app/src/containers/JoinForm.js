@@ -29,8 +29,8 @@ class JoinForm extends React.Component {
                     that.setState({errorMessage: responseInfo});
                 }
                 else {
-                    console.log(responseInfo["username"])
-                    console.log(responseInfo["room"])
+                    // console.log(responseInfo["username"])
+                    // console.log(responseInfo["room"])
                     that.setState({errorMessage: ""});
                     that.props.handler(responseInfo["username"], responseInfo["room"])
                 }

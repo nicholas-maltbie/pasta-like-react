@@ -12,6 +12,11 @@ class HomePage extends React.Component {
             "USERNAME": null,
             "ROOM": null
         }
+        
+        // this.state = {
+        //     "USERNAME": "name",
+        //     "ROOM": "room"
+        // }
     }
 
     handler(userId, roomId) {
